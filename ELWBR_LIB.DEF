@@ -1,0 +1,6 @@
+; Filename: ELWBR_LIB.DEF
+LIBRARY ELWBR.DLL
+; *** Visual Studio 2022 EXPORT ALIASES ONLY ***
+; Bridge - Copyright (c) 2024 Elwynor Technologies
+EXPORTS
+    init__elwbr=_init__elwbr	@1

@@ -1,0 +1,443 @@
+/*靈컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  � ELWBR.msg                  Contract Bridge   V. 0.7.0
+  픔컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  � (c) 1989,1990  Amusers! Inc.       By Gene Swope
+  � (c) 2004       Elwynor Technologies
+  픔컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  픔컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  틄lease note that the order of these messages is NOT arbitrary.
+  튦he order of the messages, and their proximity are integral to the
+  튴unctioning of the program. If you need to add messages feel
+  튴ree to do so at the end of the file.
+  픔컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  � DO NOT put any messages ahead of these! they must be the first 4 !!!
+  聃컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴 */
+
+NORTH {%sN%s}   
+EAST  {%sE%s}   
+SOUTH {%sS%s}   
+WEST  {%sW%s} 
+
+LEVEL4 {Elwynor Technologies: Bridge} 
+
+/*靈컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  틊hese are prompt characters for whoever's turn it is
+  튷n friendly mode, and also values for abpmode.
+  聃컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴 */
+PREDEAL  {d} S 1 Prompt: before the first hand is dealt 
+BIDDING  {b} S 1 Prompt: hand has been dealt, bidding round 
+PREPLAY  {p} S 1 Prompt: bidding is over, but first card not played yet
+PLAYING  {p} S 1 Prompt: hand is in play 
+POSTPLAY {d} S 1 Prompt: hand has been played. ready for next deal 
+ALTMOD1  {1} S 1 Prompt: spare 
+ALTMOD2  {2} S 1 Prompt: spare 
+
+/*靈컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  틊heses are alternate prompt characters for SILENT play
+  聃컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴 */
+PREDEALS {d} S 1 Alt. Silent Prompt before first hand is dealt
+BIDDINGS {B} S 1 Alt. Silent Prompt hand dealt, bidding round
+PREPLAYS {P} S 1 Alt. Silent Prompt bidding over, card not played yet
+PLAYINGS {P} S 1 Alt. Silent Prompt hand is in play
+POSTPLAS {d} S 1 Alt. Silent Prompt hand played, ready for next deal
+ALTMOD1S {1S} S 1 Alt. Silent Prompt spare
+ALTMOD2S {2S} S 1 Alt. Silent Prompt spare
+
+/*靈컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  틊hese are the prompt characters for other players.
+  聃컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴 */
+MGOSSIP   {g} S 1 Prompt for other players: ok to talk now 
+MSILENT   {S} S 1 Prompt for other players: talking is not permitted 
+
+/*靈컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  틊he following are short characters strings used for various purposes.
+  聃컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴 */
+AMBRPRMT {+} S 1 a trainee is attached 
+AMBRPROM {> } S 2 Another prompt
+
+ABNONE { None. } S 10 Directional: None
+LNORTH { North } S 10 Directional: North
+LEAST  { East } S 10 Directional: East
+LSOUTH { South } S 10 Directional: South
+LWEST  { West } S 10 Directional: West
+
+LEVEL6 {Elwynor Technologies: Bridge}
+
+AMBRWELC {
+Welcome to Bridge!   Version %s    
+(c) 1989,1990  Amusers! Inc.
+(c) 2004 Elwynor Technologies
+} T Bridge game text
+
+AMBRBYE {
+Thanks for visiting and come back soon! 
+} T Bridge game text
+
+AMBRMAIN {
+Please select one of the following:
+
+    H - How to play.
+    P - Set personal parameters.
+    B - Sit down in the game.
+    T - Sit down as a trainee.
+    R - Reset the game. (all seats MUST be empty!)
+    X - Leave the room.
+
+Your choice? } T Bridge game text
+
+AMBROOPS 
+{ ...OOPS!! that command is not valid at this time.} T Bridge game text
+
+AMBRDAMN {
+FATAL program error! %s
+} T Bridge game text
+
+ABTFULL  {
+
+Sorry, this section is full, please make another selection.
+} T Bridge game text
+
+ABPICK   {
+
+The following seats are available:
+} T Bridge game text
+
+ABPICK2T {
+
+Please make your selection (or X to exit)? } T Bridge game text
+
+ABPICK2  {
+
+Please make your selection (or X to exit)? } T Bridge game text
+
+ABHERET  {
+
+The following people are currently in training:
+  } T Bridge game text
+
+ABHERE   {
+The following people are currently playing:
+  } T Bridge game text
+
+ABONLAP  {
+
+ ...Sorry, that seat is taken, try again.
+} T Bridge game text
+
+ABANNPLT {%s has entered, and sits down in the} T Bridge game text
+
+ABANNP2T {training seat.} T Bridge game text
+ABANNP2  {player's seat.} T Bridge game text
+
+ABWELLT {
+Welcome to the table, %s. You are sitting in the} T Bridge game text
+
+ABANNBYE {%s has departed from the} T Bridge game text
+
+ABANNCUT {Mysteriously, %s has disappeared from the} T Bridge game text
+
+ABNOPLAY
+{ ... There is no player for you to whisper to!} T Bridge game text
+
+ABNOTRAN
+{ ... There is no trainee for you to whisper to!} T Bridge game text
+
+ABTALKT{From Trainee %s: %s} T Bridge game text
+
+ABTALKP{From Player %s: %s} T Bridge game text
+
+AMBRSENT
+{--- Message sent ---} T Bridge game text
+
+AMBRSNTT
+{--- Private Message sent ---} T Bridge game text
+
+AMBRSHH
+{ ...This is a silent game no gossiping permitted during play!} T Bridge game text
+
+ABJUSTCR
+{ Type  ?  for help } T Bridge game text
+
+ABTL1
+{                             } T Bridge game text
+
+ABTL2
+{                             ------------------- 
+%11s } T Bridge game text
+
+ABTL2A 
+{%3s|      %-4s       | } T Bridge game text
+
+ABTL3A
+{                             |                 |} T Bridge game text
+
+ABTL4A
+{                             | %-4s       %4s |} T Bridge game text
+
+ABTL6A
+{                             |      %-4s       |} T Bridge game text
+
+ABTL3B
+{|                 |} T Bridge game text
+
+ABTL4B
+{| %-4s       %4s |} T Bridge game text
+
+ABTL6B
+{|      %-4s       |} T Bridge game text
+
+ABTL7
+{                             ------------------- 
+} T Bridge game text
+
+ABTL8A
+{Tricks:                      } T Bridge game text
+
+MYCARDS1
+{                             Spades:  } T Bridge game text
+MYCARDH1 {
+                             Hearts:  } T Bridge game text
+MYCARDD1 {
+                             Diamonds:} T Bridge game text
+MYCARDC1 {
+                             Clubs:   } T Bridge game text
+MYCARDT0 
+{     N-S: %2d                 Spades:  } T Bridge game text
+MYCARDT1 {
+     E-W: %2d                 Hearts:  } T Bridge game text
+MYCARDT2 {
+  Contract: %-16s Diamonds:} T Bridge game text
+
+RTCARDS1 { S: } T Bridge game text
+RTCARDH1 { H: } T Bridge game text
+RTCARDD1 { D: } T Bridge game text
+RTCARDC1 { C: } T Bridge game text
+
+AMBRBID1
+{Bids:  } T Bridge game text
+
+AMBRBID2 {
+           } T Bridge game text
+
+ABHESHUF {%s is shuffling the cards.} T Bridge game text
+
+ABUSHUF
+{You give the cards a good shuffle.} T Bridge game text
+
+ABNOSHUF
+{ ...It is not a good time for you to try to shuffle!} T Bridge game text
+
+ABHEDEAL {%s is dealing the cards.} T Bridge game text
+
+ABUDDEAL
+{You deal the next hand. It is your turn to bid.} T Bridge game text
+
+ABPONLY
+{ ...That command is reserved for players only!} T Bridge game text
+
+ABNODEAL
+{ ...That command is not appropriate at this time!} T Bridge game text
+
+ABHEBIDS {%s } T Bridge game text
+
+ABHEBID2 
+{ bids: "%s."} T Bridge game text
+
+ABYOUBID
+{You bid: "%s."} T Bridge game text
+
+ALLPASS {Everyone has passed the hand. It is now %s's deal.} T Bridge game text
+
+ALLPASSU{
+Everyone has passed the hand. It is now %s's deal.} T Bridge game text
+
+ABBADBID
+{That bid is not high enough. Try again.} T Bridge game text
+
+ABNODPAR
+{You can't double your partner's bid! Try again.} T Bridge game text
+
+ABNODDBL
+{You can't double a double! Try again.} T Bridge game text
+
+ABNODPAS
+{There is no bid to double! Try again.} T Bridge game text
+
+ABNORPAR
+{You can't redouble your partner's double! Try again.} T Bridge game text
+
+ABNORRDB
+{You can't redouble a redouble! Try again.} T Bridge game text
+
+ABNORDBL
+{You cant redouble until someone doubles! Try again.} T Bridge game text
+
+ABULEAD {...It is your lead.} T Bridge game text
+
+ABULEAM {
+...It is your lead.} T Bridge game text
+
+ABUPLAY {
+...It is your play.} T Bridge game text
+
+ABUDLEAD {***
+...It is your lead, from dummy.} T Bridge game text
+
+ABUDLEAM {
+...It is your lead, from dummy.} T Bridge game text
+
+ABUDPLAY {
+...It is your play, from dummy.} T Bridge game text
+
+ABUBID {
+...It is your bid.} T Bridge game text
+
+ABUDEAL {
+...It is your deal} T Bridge game text
+
+ABNOCARD
+{ ...You don't have that card. Try again.} T Bridge game text
+
+NORENIG
+{ ...Sorry, you must follow suit. Try again.} T Bridge game text
+
+ABANNPLY {%s plays the %s %s.} T Bridge game text
+
+ABDNNPLY {%s plays the %s %s, from dummy.} T Bridge game text
+
+ABUUPLY
+{You play the %s %s.  } T Bridge game text
+
+ABUUDPLY
+{You play the %s %s, from dummy.  } T Bridge game text
+
+AMBRCRON
+{Commands:
+     Global:  /table   /bids  /myhand  /faceup (dummy)
+              $ (gives score sheet)
+              + (sends private message to trainee/trainer)
+     Dealer:  /shuffle /deal
+     Bidder:  /1heart  /pass  /2notrump  /double  /redouble
+     Play:    /<card>
+        examples for cards:     /h4 = heart 4
+           /d10 = diamond 10    /sa = spade ace} T Bridge game text
+
+Most commands can be abbreviated to a / with a single character.} T Bridge game text
+
+ABHETOOK {%s (%s) takes the trick%s} T Bridge game text
+
+ABNXTDLR {
+%s (%s) will deal the next hand.} T Bridge game text
+
+ABGRESET {
+
+*********************** THE GAME HAS BEEN RESET **************************
+} T Bridge game text
+
+AMBRHOW2 {
+Commands:
+     Global:  /table   /bids  /myhand  /faceup (dummy)
+              $ (gives score sheet)
+              + (sends private message to trainee/trainer)
+     Dealer:  /shuffle /deal
+     Bidder:  /1heart  /pass  /2notrump  /double  /redouble
+     Play:    /<card>
+        examples for cards:     /h4 = heart 4
+           /d10 = diamond 10    /sa = spade ace} T Bridge game text
+
+Most commands can be abbreviated to a / with a single character.
+
+} T Bridge game text
+
+AMBRPERP {
+The following personal parameters may be set:
+   S -- Demand silent game.    G -- Gossip is permitted during play.
+} T Bridge game text
+
+AMBRPER3 {
+You currently have the following parameters set:
+   } T Bridge game text
+
+AMBRPER2 {
+Select a parameter (or X to exit)? } T Bridge game text
+
+AMBRSHSC{
+               -------------------
+               |   N-S  |  E-W   |
+               |--------|--------|
+above the line | %6d | %-6d |
+               |========|========|
+         games |      %1d | %1d      |
+    part score |     %2d | %-2d     |
+               |--------|--------|
+         total | %6d | %-6d |
+               -------------------
+} T Bridge game text
+
+ABANNHON{
+
+%s scores an honors bonus of %d above the line.} T Bridge game text
+
+ABMADEIT{
+
+%s makes the contract of %s} T Bridge game text
+
+ABMADE2
+{ scoring %d below the line.} T Bridge game text
+
+ABOVER{
+    %d overtrick(s) scores %d above the line.} T Bridge game text
+
+ABSSLAM{
+    Small slam bonus: %d.} T Bridge game text
+
+ABGSLAM{
+    Grand slam bonus: %d.} T Bridge game text
+
+INSULTM{
+    And 50 points above the line for the insult.} T Bridge game text
+
+ABWASSET{
+
+%s went down %d trick(s) on their contract of %s.
+    %s scores %d above the line. } T Bridge game text
+
+ABSCSUMR{
+
+Score in this rubber so far is:  N-S: %d     E-W: %d} T Bridge game text
+
+ABENDRUB{
+
+The rubber is over.  Final Totals:  N-S: %d     E-W: %d} T Bridge game text
+
+ABTKGAME{
+
+    %s score another game.} T Bridge game text
+
+ABWELP{
+.....That was close! Well played, %s!} T Bridge game text
+
+ABWELP1{
+.....What a sandbagger, %s!} T Bridge game text
+
+ABWELP2{
+.....Just a tad underbid, eh, %s?} T Bridge game text
+
+ABWELP3{
+.....Ok, %s, where did you guys learn to bid?} T Bridge game text
+
+ABWELP4{
+.....Talk about underbidding!!!!} T Bridge game text
+
+ABWELP5{
+.....You made a slam, %s! Too bad you didn't bid it!} T Bridge game text
+
+ABWELP6{
+.....Ok, %s, admit it, you have never played before, have you?
+     <grumbled> "Bid one and take 'em all."} T Bridge game text
+
+
+/*靈컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+  튍dditional messages may be inserted after this point.
+  聃컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴 */
+
